@@ -12,3 +12,4 @@ pyjwt
 psycopg2-binary
 email-validator
 python-jose[cryptography]
+uvicorn[standard]
