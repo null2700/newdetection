@@ -5,8 +5,8 @@ import bcrypt
 from jose import jwt, JWTError
 from fastapi import HTTPException, status, Depends, Request
 from sqlalchemy.orm import Session
-import models
-from database import get_db
+import backend.models
+from backend.database import get_db
 
 SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key-for-dev-only-change-in-prod")
 ALGORITHM = "HS256"
