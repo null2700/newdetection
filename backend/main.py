@@ -17,7 +17,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from news_bias_filter import fetch_news, preprocess_text, predict_bias, explain_bias
 
 import dashboard_user
-
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 # Load config
 load_dotenv()
 API_KEY = os.getenv("NEWS_API_KEY")
