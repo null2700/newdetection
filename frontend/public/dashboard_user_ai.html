@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI RAG Intelligence Dashboard</title>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0a0a0f; color: #fff; margin: 0; }
+        .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+        .chat-box { background: #13131a; border: 1px solid #ffffff1a; padding: 1.5rem; border-radius: 1rem; min-height: 400px; max-height: 500px; overflow-y: auto; margin-bottom: 1rem; }
+        .message { margin-bottom: 1rem; padding: 1rem; border-radius: 0.5rem; }
+        .user-msg { background: #1a1a24; border: 1px solid #ffffff1a; }
+        .ai-msg { background: #0a202e; border: 1px solid #10405e; }
+        .input-group { display: flex; gap: 1rem; }
+        input[type="text"] { flex: 1; padding: 1rem; border-radius: 0.5rem; border: 1px solid #ffffff1a; background: #13131a; color: #fff; }
+        button { padding: 1rem 2rem; border-radius: 0.5rem; border: none; background: #06D6A0; color: #000; font-weight: bold; cursor: pointer; }
+        button:hover { opacity: 0.9; }
+        .upload-section { margin-top: 2rem; padding: 1rem; border: 1px solid #ffffff1a; border-radius: 0.5rem; }
+        .upload-section input { margin-right: 1rem; }
+        .source-tag { font-size: 0.75rem; background: #ffffff1a; padding: 0.2rem 0.5rem; border-radius: 0.25rem; margin-right: 0.5rem; display: inline-block; margin-top: 5px; color: #06d6a0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 AI Knowledge Assistant</h1>
+        <p>Ask questions about your uploaded documents or news articles using our standalone RAG Microservice.</p>
+        
+        <div class="chat-box" id="chatBox">
+            <!-- Messages will appear here -->
+            <div class="message ai-msg">
+                <strong>System:</strong><br><br>Welcome! I'm your RAG assistant. Please upload a PDF to the knowledge base below, or type a question if documents are already indexed.
+            </div>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="queryInput" placeholder="Ask a question about the news..." onkeypress="if(event.key === 'Enter') askQuestion()">
+            <button onclick="askQuestion()">Ask</button>
+        </div>
+
+        <div class="upload-section">
+            <h3>Upload Knowledge (PDF)</h3>
+            <input type="file" id="pdfUpload" accept=".pdf">
+            <button onclick="uploadPdf()">Upload to FAISS Index</button>
+        </div>
+    </div>
+
+    <script>
+        const RAG_API_URL = "http://127.0.0.1:8001/rag";
+        
+        // Use the existing app's auth token
+        function getHeaders() {
+            const token = localStorage.getItem("token") || localStorage.getItem("access_token");
+            let tokenStr = token ? token : "";
+            if (tokenStr && tokenStr.startsWith("Bearer ")) {
+                tokenStr = tokenStr.split(" ")[1];
+            }
+            return tokenStr ? { "Authorization": `Bearer ${tokenStr}` } : {};
+        }
+
+        async function askQuestion() {
+            const input = document.getElementById("queryInput");
+            const query = input.value.trim();
+            if (!query) return;
+
+            appendMessage("You", query, "user-msg");
+            input.value = "";
+
+            try {
+                const headers = getHeaders();
+                headers["Content-Type"] = "application/json";
+
+                const response = await fetch(`${RAG_API_URL}/query`, {
+                    method: "POST",
+                    headers: headers,
+                    body: JSON.stringify({ query: query, top_k: 3 })
+                });
+
+                if (!response.ok) {
+                    const err = await response.json();
+                    appendMessage("Error", err.detail || "Failed to fetch response.", "ai-msg");
+                    return;
+                }
+
+                const data = await response.json();
+                
+                // Display sources used in the RAG retrieval
+                let sourcesHtml = "";
+                if (data.sources && data.sources.length > 0) {
+                    sourcesHtml = "<br><div><strong>Sources used:</strong></div>" + 
+                        data.sources.map(s => `<span class="source-tag">${s.source} (score: ${s.score})</span>`).join("");
+                }
+                
+                appendMessage("AI Assistant", data.answer + sourcesHtml, "ai-msg");
+
+            } catch (err) {
+                appendMessage("Error", err.message, "ai-msg");
+            }
+        }
+
+        async function uploadPdf() {
+            const fileInput = document.getElementById("pdfUpload");
+            if (!fileInput.files.length) {
+                alert("Please select a file first.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("file", fileInput.files[0]);
+
+            try {
+                const response = await fetch(`${RAG_API_URL}/upload/pdf`, {
+                    method: "POST",
+                    headers: getHeaders(), // Don't set Content-Type for FormData
+                    body: formData
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert(`Upload successful! Added ${result.chunks_added} chunks. Total in vector store: ${result.total_chunks}`);
+                    fileInput.value = "";
+                } else {
+                    alert(`Error: ${result.detail}`);
+                }
+            } catch (err) {
+                alert(`Upload failed. Is the RAG service running on port 8001? ${err.message}`);
+            }
+        }
+
+        function appendMessage(sender, text, className) {
+            const chatBox = document.getElementById("chatBox");
+            const msgDiv = document.createElement("div");
+            msgDiv.className = `message ${className}`;
+            msgDiv.innerHTML = `<strong>${sender}:</strong><br><br>${text}`;
+            chatBox.appendChild(msgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>

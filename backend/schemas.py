@@ -28,3 +28,20 @@ class FeedbackRequest(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str
+
+class AdaptiveUserCreate(BaseModel):
+    username: str
+    email: str
+    password: str
+    age_group: str
+    education_level: str
+    interest_domain: List[str]
+
+class AdaptiveUserLogin(BaseModel):
+    username: str
+    password: str
+
+class AdaptiveNewsAnalyzeRequest(BaseModel):
+    title: str
+    content: str
+    source_url: str

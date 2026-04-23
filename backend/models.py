@@ -66,3 +66,36 @@ class News(Base):
     
     # Relationships
     user = relationship("User", back_populates="news")
+
+from sqlalchemy import JSON
+
+class AdaptiveUser(Base):
+    __tablename__ = "adaptive_users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, index=True, nullable=False)
+    email = Column(String, unique=True, index=True, nullable=False)
+    hashed_password = Column(String, nullable=False)
+    age_group = Column(String)
+    education_level = Column(String)
+    interest_domain = Column(JSON)
+    learning_mode = Column(String)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    news_items = relationship("AdaptiveNewsItem", back_populates="user")
+
+class AdaptiveNewsItem(Base):
+    __tablename__ = "adaptive_news_items"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("adaptive_users.id"), index=True)
+    title = Column(String)
+    content = Column(Text)
+    source_url = Column(String)
+    bias_label = Column(String)
+    bias_score = Column(Float)
+    explanation_level = Column(String)
+    summary_text = Column(Text)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    user = relationship("AdaptiveUser", back_populates="news_items")
