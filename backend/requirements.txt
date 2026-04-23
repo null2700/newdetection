@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+gunicorn
+transformers
+torch
+nltk
+python-dotenv
+requests
+sqlalchemy
+passlib[bcrypt]
+pyjwt
+psycopg2-binary
+email-validator

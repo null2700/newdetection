@@ -1,0 +1,103 @@
+/* Enhanced Calendar Heatmap Styles */
+.react-calendar-heatmap .color-empty {
+  fill: #f3f4f6;
+}
+.react-calendar-heatmap .color-scale-1 {
+  fill: #dbeafe;
+}
+.react-calendar-heatmap .color-scale-2 {
+  fill: #93c5fd;
+}
+.react-calendar-heatmap .color-scale-3 {
+  fill: #3b82f6;
+}
+.react-calendar-heatmap .color-scale-4 {
+  fill: #1e40af;
+}
+
+.react-calendar-heatmap rect {
+  width: 10px;
+  height: 10px;
+  rx: 2;
+  ry: 2;
+}
+
+.react-calendar-heatmap rect:hover {
+  stroke: #3b82f6;
+  stroke-width: 1px;
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Bias highlight styling */
+mark.bias-highlight {
+  background-color: #fef3c7;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+/* Prose styling for article content */
+.prose {
+  color: #374151;
+  line-height: 1.75;
+}
+
+.prose p {
+  margin-bottom: 1.25rem;
+}
+
+.prose strong {
+  color: #111827;
+  font-weight: 600;
+}
+
+.prose a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  color: #1d4ed8;
+}
+
+/* Focus states for accessibility */
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
