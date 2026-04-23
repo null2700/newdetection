@@ -10,11 +10,8 @@ from dotenv import load_dotenv
 from sqlalchemy.orm import Session
 
 # Database and Auth setup
-import models
-import schemas
-import auth
-from database import engine, get_db, Base
-
+from backend import models, schemas, auth
+from backend.database import engine, get_db, Base
 # Add parent directory to path so we can import news_bias_filter
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from news_bias_filter import fetch_news, preprocess_text, predict_bias, explain_bias
