@@ -2,6 +2,15 @@
 
 
 
+![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=flat-square&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.95+-009688?style=flat-square&logo=fastapi&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0+-CC2927?style=flat-square)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15+-336791?style=flat-square&logo=postgresql&logoColor=white)
+![React](https://img.shields.io/badge/JavaScript-Vanilla_ES6+-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![JWT](https://img.shields.io/badge/Auth-JWT_+_bcrypt-000000?style=flat-square&logo=jsonwebtokens)
+![GCP](https://img.shields.io/badge/Cloud-GCP_Ready-4285F4?style=flat-square&logo=googlecloud&logoColor=white)
+![IEEE](https://img.shields.io/badge/Published-IEEE_2025-00629B?style=flat-square)
+
 > A production grade, role segregated news analysis platform that dynamically adapts its analytical depth, interface complexity, and AI generated output to the user's educational profile  from school students to UPSC civil services aspirants.
 
    
