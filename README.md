@@ -35,7 +35,7 @@ The architecture enforces this separation at every layer: separate frontend modu
 
 ---
 
-![Architecture Diagram](./architecture.png)
+![Architecture Diagram](./architecture.png)  
 
 ## Tech Stack
 
