@@ -75,36 +75,37 @@ The platform enforces three completely separate experiences at both the routing 
 ### School Dashboard `/school/*`
 **Target:** Ages 10–18
 
-  Pastel gradient UI with 20px border radius cards and Nunito typeface (18–20px)
-  Emoji based bias indicators (🔵 Left / 🔴 Right / ⚖️ Balanced / ⬜ Neutral)
-  Single sentence "What is this about?" explanations
-  Vocabulary helper: automatically extracts words over 8 characters and maps them to plain language definitions
-  Bottom tab navigation (mobile first)
-  Animated card entrance (CSS keyframe bounce)
+- Pastel gradient UI with 20px border-radius cards and Nunito typeface (18–20px)
+- Emoji-based bias indicators (Left, Right, Balanced, Neutral)
+- Single-sentence "What is this about?" explanations
+- Vocabulary helper that extracts words over 8 characters and maps them to simple definitions
+- Bottom tab navigation designed for mobile-first experience
+- Animated card entrance using CSS keyframe bounce
+
 
 ### Graduate Dashboard `/graduate/*`
 **Target:** Ages 18–30
 
-  Two column layout (260px sidebar + fluid main content)
-  Bias percentage bar (0–100%) color graded from blue (left) to red (right)
-  Chart.js doughnut chart showing bias distribution across analyzed articles
-  Structured Pros / Cons two column breakdown per article
-  Historical context paragraph and clickable topic tag filtering
-  DM Sans typeface, 15px body, professional neutral color system
+- Two-column layout (260px sidebar with fluid main content)
+- Bias percentage bar ranging from 0 to 100 with color gradient from blue to red
+- Chart.js doughnut chart showing bias distribution across analyzed articles
+- Structured Pros and Cons two-column breakdown per article
+- Historical context paragraph with clickable topic-based filtering
+- DM Sans typeface with 15px body and professional neutral color system
+
 
 ### UPSC Dashboard `/upsc/*`
 **Target:** Ages 22–30+ (Civil Services Aspirants)
 
-  Three column dark layout (200px left sidebar + fluid center + 240px right panel)
-  GS Paper classification per article (GS1: History/Society, GS2: Polity/Governance, GS3: Economy/Environment, GS4: Ethics)
-  GS Paper progress tracker with animated fill bars
-  Structured Mains answer drafts (Introduction → Body → Conclusion, ~150–200 words)
-  Essay point extraction (5–7 copyable bullet points per article)
-  Policy implication analysis and linked government scheme detection
-  Constitutional article cross referencing
-  7 day current affairs calendar view
-  IBM Plex Sans typeface, 13px body, dark navy (`#0D1B2A`) color system
-
+- Three-column dark layout (200px left sidebar, fluid center, 240px right panel)
+- GS Paper classification per article (GS1 History and Society, GS2 Polity and Governance, GS3 Economy and Environment, GS4 Ethics)
+- GS Paper progress tracker with animated fill indicators
+- Structured Mains answer drafts with Introduction, Body, and Conclusion format (150–200 words)
+- Essay point extraction with 5 to 7 structured bullet points per article
+- Policy implication analysis with linked government scheme detection
+- Constitutional article cross-referencing for deeper understanding
+- Seven-day current affairs calendar view
+- IBM Plex Sans typeface with 13px body and dark navy color system (#0D1B2A)
    
 
 ## Project Structure
@@ -159,18 +160,17 @@ news_bias_platform/
 ```
 
    
-
 ## API Reference
 
-| Method | Endpoint | Auth | Description |
-|   |   |   |   |
-| `POST` | `/auth/signup` | None | Register user with age group and education level; returns JWT + redirect path |
-| `POST` | `/auth/login` | None | Authenticate user; returns JWT + role based redirect path |
-| `GET` | `/dashboard data` | JWT | Returns role differentiated JSON (school / graduate / upsc schema) |
-| `POST` | `/news/analyze` | JWT | Ingests article; returns age appropriate bias analysis and summary |
-| `GET` | `/upsc/current affairs` | JWT (civil_services only) | Last 7 days of articles grouped by date |
-| `GET` | `/upsc/mains generator` | JWT (civil_services only) | Generates structured Mains answer for a given topic |
-| `POST` | `/news/upload pdf` | JWT | Uploads PDF to Cloud Storage; triggers RAG pipeline |
+| Method | Endpoint                | Authentication                | Description                                                                 |
+|--------|-------------------------|-------------------------------|-----------------------------------------------------------------------------|
+| POST   | /auth/signup            | None                          | Register user with age group and education level, returns JWT and redirect path |
+| POST   | /auth/login             | None                          | Authenticate user, returns JWT and role-based redirect path                |
+| GET    | /dashboard-data         | JWT                           | Returns role-specific JSON for school, graduate, or upsc users             |
+| POST   | /news/analyze           | JWT                           | Analyzes article and returns bias detection with adaptive explanation      |
+| GET    | /upsc/current-affairs   | JWT (civil_services only)     | Returns last seven days of articles grouped by date                         |
+| GET    | /upsc/mains-generator   | JWT (civil_services only)     | Generates structured mains answer for a given topic                        |
+| POST   | /news/upload-pdf        | JWT                           | Uploads PDF to Cloud Storage and triggers RAG pipeline                     |
 
    
 
@@ -215,15 +215,21 @@ news_bias_platform/
 
 ```bash
 cd backend
-python  m venv venv
+## Local Development Setup
+
+### Backend
+
+```bash
+cd backend
+python -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\activate
-pip install  r requirements.txt
+pip install -r requirements.txt
 
 # Copy and configure environment
 cp .env.gcp .env
-# Set ENVIRONMENT=local, DATABASE_URL=postgresql+asyncpg://...
+# Set ENVIRONMENT=local and DATABASE_URL=postgresql+asyncpg://...
 
-uvicorn main:app   reload   port 8000
+uvicorn main:app --reload --port 8000
 ```
 
 ### RAG Microservice
@@ -247,19 +253,19 @@ Open `http://localhost:8080/auth/signup.html` to begin.
 
    
 
+
 ## GCP Cloud Deployment
 
 The project includes full GCP deployment configuration. Set `ENVIRONMENT=gcp` in your environment to activate cloud services.
 
-| Local | GCP Equivalent |
-|   |   |
-| Local PostgreSQL | Cloud SQL (db f1 micro, free tier) |
-| Local file storage | Cloud Storage bucket |
-| `python  m http.server` | Firebase Hosting |
-| FastAPI on localhost | Cloud Run (containerized) |
-| RAG service on localhost | Cloud Run (separate container) |
-| `print()` logging | Cloud Logging (structured JSON) |
-
+| Local Setup              | GCP Equivalent                         |
+|------------------------|----------------------------------------|
+| Local PostgreSQL       | Cloud SQL (db f1 micro, free tier)     |
+| Local file storage     | Cloud Storage bucket                   |
+| python -m http.server  | Firebase Hosting                       |
+| FastAPI on localhost   | Cloud Run (containerized)              |
+| RAG service localhost  | Cloud Run (separate container)         |
+| print() logging        | Cloud Logging (structured JSON)        |
 ```bash
 # Deploy all services via Cloud Build
 gcloud builds submit   config cloudbuild.yaml
@@ -274,12 +280,12 @@ Recommended region: `asia south1` (Mumbai).
 
 ## Security Model
 
-  All API routes require a valid JWT in the `Authorization: Bearer <token>` header
-  JWT payload embeds `education_level` and `age_group` at login time
-  A `require_role(role)` FastAPI dependency validates the JWT role claim on every protected endpoint
-  Cross role access (e.g., a school user requesting `/upsc/*`) returns HTTP 403
-  Passwords are hashed using bcrypt with salt rounds; plaintext passwords are never stored or logged
-  Frontend `router.js` validates the JWT on every page load and redirects to the correct role specific page, preventing manual URL navigation to other role dashboards
+- All API routes require a valid JWT in the Authorization header as Bearer token
+- JWT payload embeds education_level and age_group at login time
+- A require_role(role) FastAPI dependency validates the JWT role claim on every protected endpoint
+- Cross role access such as a school user requesting /upsc/* returns HTTP 403
+- Passwords are hashed using bcrypt with salt rounds and are never stored or logged in plaintext
+- Frontend router.js validates the JWT on every page load and redirects users to the correct role specific dashboard
 
    
 
@@ -309,7 +315,3 @@ GPA: 8.55 | GDG Open Source Contributor & Team Lead
 [![LinkedIn](https://img.shields.io/badge/LinkedIn Connect 0A66C2?style=flat square&logo=linkedin)](https://linkedin.com)
 [![GitHub](https://img.shields.io/badge/GitHub Profile 181717?style=flat square&logo=github)](https://github.com)
 [![Email](https://img.shields.io/badge/Email Contact EA4335?style=flat square&logo=gmail)](mailto:sohamgurav.skn.comp@gmail.com)
-
-   
-
-*This project was developed independently as a portfolio demonstration of full stack AI engineering, role based system design, and adaptive UX architecture.*
