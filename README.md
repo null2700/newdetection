@@ -54,18 +54,17 @@ In memory caching on the AI microservice eliminates redundant embedding generati
 ![Architecture Diagram](./architecture1.png)  
 
 ## Tech Stack
-
-| Layer | Technology |
-|   |   |
-| **Frontend** | Vanilla JavaScript (ES6+), HTML5, CSS3 (independent per role stylesheets) |
-| **Backend** | Python 3.9+, FastAPI, SQLAlchemy 2.0 (async) |
-| **Database** | PostgreSQL 15, SQLAlchemy ORM |
-| **AI / ML** | RAG pipeline, FAISS (vector indexing), SentenceTransformers (`all MiniLM L6 v2`) |
-| **LLM Integration** | OpenAI API, Ollama / LLaMA 3 (local inference) |
-| **Authentication** | JWT (python jose), bcrypt (passlib), RBAC middleware |
-| **Architecture** | Microservices, RESTful APIs, LRU caching |
-| **Cloud** | GCP Cloud Run, Cloud SQL, Cloud Storage, Firebase Hosting (deployment ready) |
-| **DevOps** | Docker, Cloud Build CI/CD, Cloud Logging, Cloud Monitoring |
+| Layer            | Technology                                                                 |
+|------------------|---------------------------------------------------------------------------|
+| Frontend         | Vanilla JavaScript ES6+, HTML5, CSS3 (independent per role stylesheets)   |
+| Backend          | Python 3.9+, FastAPI, SQLAlchemy 2.0 (async)                              |
+| Database         | PostgreSQL 15, SQLAlchemy ORM                                             |
+| AI / ML          | RAG pipeline, FAISS (vector indexing), SentenceTransformers (all MiniLM L6 v2) |
+| LLM Integration  | OpenAI API, Ollama, LLaMA 3 (local inference)                             |
+| Authentication   | JWT (python jose), bcrypt (passlib), RBAC middleware                      |
+| Architecture     | Microservices, RESTful APIs, LRU caching                                  |
+| Cloud            | GCP Cloud Run, Cloud SQL, Cloud Storage, Firebase Hosting                 |
+| DevOps           | Docker, Cloud Build CI CD, Cloud Logging, Cloud Monitoring                |
 
    
 
