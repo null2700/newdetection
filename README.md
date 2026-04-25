@@ -27,13 +27,27 @@ The architecture enforces this separation at every layer: separate frontend modu
 
 ## Key Features
 
-  **Adaptive Bias Engine**  Detects political lean (Left / Center / Right / Neutral) and formats the entire output payload based on the requesting user's `age_group` and `education_level` extracted from the JWT
-  **Role Segregated Frontend**  Three completely independent frontend modules (`school_dashboard.js`, `graduate_dashboard.js`, `upsc_dashboard.js`), each with its own CSS design system, layout architecture, and API parsing logic
-  **Polymorphic API Responses**  A single `/dashboard data` endpoint returns three structurally distinct JSON schemas depending on the authenticated user's role
-  **UPSC Intelligence Layer**  Dedicated endpoints for GS Paper mapping (GS1–GS4), policy implication extraction, essay point generation, and structured Mains answer drafting
-  **Secure Stateless Authentication**  JWT tokens with embedded role claims, bcrypt password hashing, and RBAC middleware that blocks cross role API access with HTTP 403
-  **GCP Cloud Ready Architecture**  Environment based configuration switching between local development (Ollama + local PostgreSQL) and GCP production (Cloud Run + Cloud SQL + Cloud Storage)
-  **LRU Caching Layer**  In memory caching on the AI microservice eliminates redundant embedding generation for repeated semantic queries
+  1) Adaptive Bias Engine  
+Detects political lean Left Center Right Neutral and formats the entire output payload based on the requesting user's age_group and education_level extracted from the JWT  
+
+2) Role Segregated Frontend  
+Three completely independent frontend modules school_dashboard.js graduate_dashboard.js upsc_dashboard.js each with its own CSS design system layout architecture and API parsing logic  
+
+3) Polymorphic API Responses  
+A single /dashboard data endpoint returns three structurally distinct JSON schemas depending on the authenticated user's role  
+
+4) UPSC Intelligence Layer  
+Dedicated endpoints for GS Paper mapping GS1 GS4 policy implication extraction essay point generation and structured Mains answer drafting  
+
+5) Secure Stateless Authentication  
+JWT tokens with embedded role claims bcrypt password hashing and RBAC middleware that blocks cross role API access with HTTP 403  
+
+6) GCP Cloud Ready Architecture  
+Environment based configuration switching between local development Ollama local PostgreSQL and GCP production Cloud Run Cloud SQL Cloud Storage  
+
+7) LRU Caching Layer  
+In memory caching on the AI microservice eliminates redundant embedding generation for repeated semantic queries  
+
 
    
 
