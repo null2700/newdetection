@@ -176,31 +176,36 @@ news_bias_platform/
 
 ## Database Schema
 
-### `users`
-| Column | Type | Description |
-|   |   |   |
-| `id` | Integer PK | Auto increment primary key |
-| `username` | String(50) | Unique, indexed |
-| `email` | String(120) | Unique, indexed |
-| `hashed_password` | String(255) | bcrypt hash |
-| `age_group` | String(30) | `school_beginner` / `school_advanced` / `graduate` / `graduate_advanced` / `civil_services_expert` |
-| `education_level` | String(30) | `school` / `graduate` / `civil_services` |
-| `interest_domain` | JSON | `["politics", "economy", ...]` |
-| `learning_mode` | String(20) | `visual` / `analytical` / `exam_prep` |
+## Database Schema
 
-### `news_items`
-| Column | Type | Description |
-|   |   |   |
-| `id` | Integer PK | Auto increment primary key |
-| `user_id` | Integer FK | References `users.id` |
-| `title` | String(500) | Article title |
-| `content` | Text | Full article body |
-| `bias_label` | String(20) | `left` / `center` / `right` / `neutral` |
-| `bias_score` | Float | 0.0 (left) → 1.0 (right) |
-| `explanation_level` | String(20) | `school` / `graduate` / `upsc` |
-| `gs_paper` | String(10) | GS1–GS4 (UPSC only) |
-| `mains_answer` | Text | Structured Mains draft (UPSC only) |
-| `essay_points` | JSON | Extracted essay bullet points (UPSC only) |
+### users
+
+| Column           | Type         | Constraints / Details                                                                 |
+|------------------|-------------|----------------------------------------------------------------------------------------|
+| id               | Integer      | Primary Key, Auto Increment                                                           |
+| username         | String(50)   | Unique, Indexed                                                                       |
+| email            | String(120)  | Unique, Indexed                                                                       |
+| hashed_password  | String(255)  | Stored as bcrypt hash                                                                 |
+| age_group        | String(30)   | school_beginner, school_advanced, graduate, graduate_advanced, civil_services_expert |
+| education_level  | String(30)   | school, graduate, civil_services                                                      |
+| interest_domain  | JSON         | Example ["politics", "economy"]                                                       |
+| learning_mode    | String(20)   | visual, analytical, exam_prep                                                         |
+
+
+### news_items
+
+| Column            | Type         | Constraints / Details                                   |
+|------------------|-------------|----------------------------------------------------------|
+| id               | Integer      | Primary Key, Auto Increment                             |
+| user_id          | Integer      | Foreign Key referencing users.id                        |
+| title            | String(500)  | Article title                                           |
+| content          | Text         | Full article body                                       |
+| bias_label       | String(20)   | left, center, right, neutral                            |
+| bias_score       | Float        | Range 0.0 to 1.0 representing bias direction            |
+| explanation_level| String(20)   | school, graduate, upsc                                  |
+| gs_paper         | String(10)   | GS1, GS2, GS3, GS4 for UPSC users                       |
+| mains_answer     | Text         | Structured mains answer draft                           |
+| essay_points     | JSON         | List of extracted essay bullet points                   |
 
    
 
