@@ -35,43 +35,7 @@ The architecture enforces this separation at every layer: separate frontend modu
 
 ---
 
-## Architecture
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                    Client Browser                        │
-│  ┌──────────────┐ ┌─────────────────┐ ┌──────────────┐  │
-│  │school/       │ │graduate/        │ │upsc/         │  │
-│  │dashboard.html│ │dashboard.html   │ │dashboard.html│  │
-│  └──────┬───────┘ └────────┬────────┘ └──────┬───────┘  │
-│         │                  │                  │          │
-│  school_dashboard.js  graduate_dashboard.js  upsc_dashboard.js
-└─────────┼──────────────────┼──────────────────┼──────────┘
-          │     JWT Bearer Token (role-embedded) │
-          ▼                  ▼                  ▼
-┌─────────────────────────────────────────────────────────┐
-│              FastAPI Backend  :8000                      │
-│  ┌────────────┐  ┌─────────────────┐  ┌──────────────┐  │
-│  │ /auth/*    │  │ /dashboard-data │  │  /upsc/*     │  │
-│  │ signup     │  │ (polymorphic)   │  │  (role-guard)│  │
-│  │ login      │  └────────┬────────┘  └──────────────┘  │
-│  └────────────┘           │                              │
-│                    ┌──────▼──────┐                       │
-│                    │ Role Router │                        │
-│                    │ + JWT Guard │                        │
-│                    └──────┬──────┘                       │
-└───────────────────────────┼─────────────────────────────┘
-                            │
-          ┌─────────────────┼─────────────────┐
-          ▼                 ▼                  ▼
-┌──────────────────┐ ┌────────────┐ ┌─────────────────────┐
-│  bias_engine.py  │ │ PostgreSQL │ │  RAG Microservice   │
-│  Keyword heuristic│ │ SQLAlchemy │ │  :8001              │
-│  + age formatter  │ │ ORM        │ │  FAISS + ST + LLM   │
-└──────────────────┘ └────────────┘ └─────────────────────┘
-```
-
----
+![Architecture Diagram](./architecture.png)
 
 ## Tech Stack
 
