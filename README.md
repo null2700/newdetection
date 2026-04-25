@@ -1,15 +1,8 @@
 # Adaptive News Bias Detection & Educational Intelligence Platform
 
-![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=flat-square&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.95+-009688?style=flat-square&logo=fastapi&logoColor=white)
-![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0+-CC2927?style=flat-square)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15+-336791?style=flat-square&logo=postgresql&logoColor=white)
-![React](https://img.shields.io/badge/JavaScript-Vanilla_ES6+-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![JWT](https://img.shields.io/badge/Auth-JWT_+_bcrypt-000000?style=flat-square&logo=jsonwebtokens)
-![GCP](https://img.shields.io/badge/Cloud-GCP_Ready-4285F4?style=flat-square&logo=googlecloud&logoColor=white)
-![IEEE](https://img.shields.io/badge/Published-IEEE_2025-00629B?style=flat-square)
 
-> A production grade, role segregated news analysis platform that dynamically adapts its analytical depth, interface complexity, and AI generated output to the user's educational profile — from school students to UPSC civil services aspirants.
+
+> A production grade, role segregated news analysis platform that dynamically adapts its analytical depth, interface complexity, and AI generated output to the user's educational profile  from school students to UPSC civil services aspirants.
 
    
 
@@ -17,7 +10,7 @@
 
 The Adaptive News Bias Detection Platform is a full stack AI intelligence system built to address a fundamental gap in news literacy tooling: existing bias detection tools produce a single, undifferentiated output regardless of who is reading it. This platform inverts that assumption.
 
-By embedding the user's educational profile directly into the JWT token at authentication time, the system routes each request through a role aware response engine that produces structurally distinct outputs — emoji based summaries for school students, structured pros/cons analysis for graduates, and UPSC Mains format answer drafts for civil services aspirants — all from the same ingested article.
+By embedding the user's educational profile directly into the JWT token at authentication time, the system routes each request through a role aware response engine that produces structurally distinct outputs  emoji based summaries for school students, structured pros/cons analysis for graduates, and UPSC Mains format answer drafts for civil services aspirants  all from the same ingested article.
 
 The architecture enforces this separation at every layer: separate frontend modules per role, separate API response schemas per role, and backend middleware that validates role claims before serving any data.
 
@@ -25,13 +18,13 @@ The architecture enforces this separation at every layer: separate frontend modu
 
 ## Key Features
 
-  **Adaptive Bias Engine** — Detects political lean (Left / Center / Right / Neutral) and formats the entire output payload based on the requesting user's `age_group` and `education_level` extracted from the JWT
-  **Role Segregated Frontend** — Three completely independent frontend modules (`school_dashboard.js`, `graduate_dashboard.js`, `upsc_dashboard.js`), each with its own CSS design system, layout architecture, and API parsing logic
-  **Polymorphic API Responses** — A single `/dashboard data` endpoint returns three structurally distinct JSON schemas depending on the authenticated user's role
-  **UPSC Intelligence Layer** — Dedicated endpoints for GS Paper mapping (GS1–GS4), policy implication extraction, essay point generation, and structured Mains answer drafting
-  **Secure Stateless Authentication** — JWT tokens with embedded role claims, bcrypt password hashing, and RBAC middleware that blocks cross role API access with HTTP 403
-  **GCP Cloud Ready Architecture** — Environment based configuration switching between local development (Ollama + local PostgreSQL) and GCP production (Cloud Run + Cloud SQL + Cloud Storage)
-  **LRU Caching Layer** — In memory caching on the AI microservice eliminates redundant embedding generation for repeated semantic queries
+  **Adaptive Bias Engine**  Detects political lean (Left / Center / Right / Neutral) and formats the entire output payload based on the requesting user's `age_group` and `education_level` extracted from the JWT
+  **Role Segregated Frontend**  Three completely independent frontend modules (`school_dashboard.js`, `graduate_dashboard.js`, `upsc_dashboard.js`), each with its own CSS design system, layout architecture, and API parsing logic
+  **Polymorphic API Responses**  A single `/dashboard data` endpoint returns three structurally distinct JSON schemas depending on the authenticated user's role
+  **UPSC Intelligence Layer**  Dedicated endpoints for GS Paper mapping (GS1–GS4), policy implication extraction, essay point generation, and structured Mains answer drafting
+  **Secure Stateless Authentication**  JWT tokens with embedded role claims, bcrypt password hashing, and RBAC middleware that blocks cross role API access with HTTP 403
+  **GCP Cloud Ready Architecture**  Environment based configuration switching between local development (Ollama + local PostgreSQL) and GCP production (Cloud Run + Cloud SQL + Cloud Storage)
+  **LRU Caching Layer**  In memory caching on the AI microservice eliminates redundant embedding generation for repeated semantic queries
 
    
 
@@ -270,18 +263,18 @@ Recommended region: `asia south1` (Mumbai).
 
 ## Achievements & Recognition
 
-  **IEEE 2025** — Published: *"MultiAI Based System to Automatically Detect Bias in News Articles Using NLP Techniques"*
-  **ISIH 2024 Winner** — Smart India Hackathon 2024, representing Smt. Kashibai Navale College of Engineering, Pune
+  **IEEE 2025**  Published: *"MultiAI Based System to Automatically Detect Bias in News Articles Using NLP Techniques"*
+  **ISIH 2024 Winner**  Smart India Hackathon 2024, representing Smt. Kashibai Navale College of Engineering, Pune
 
    
 
 ## Roadmap
 
-  **LLM Upgrade** — Replace keyword heuristic bias engine with a fine tuned local LLM (LLaMA 3 via Ollama) for nuanced semantic bias detection
-  **Gamification Expansion** — Extend the reading streak and points system to reward balanced cross perspective reading habits
-  **Real Time Debate Rooms** — WebSocket based collaborative discussion rooms for Graduate level users on shared articles
-  **RAGAS Evaluation** — Integrate RAGAS / DeepEval for continuous RAG pipeline quality monitoring
-  **Mobile Application** — React Native port of the School dashboard for offline first news literacy access
+  **LLM Upgrade**  Replace keyword heuristic bias engine with a fine tuned local LLM (LLaMA 3 via Ollama) for nuanced semantic bias detection
+  **Gamification Expansion**  Extend the reading streak and points system to reward balanced cross perspective reading habits
+  **Real Time Debate Rooms**  WebSocket based collaborative discussion rooms for Graduate level users on shared articles
+  **RAGAS Evaluation**  Integrate RAGAS / DeepEval for continuous RAG pipeline quality monitoring
+  **Mobile Application**  React Native port of the School dashboard for offline first news literacy access
 
    
 
